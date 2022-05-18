@@ -61,10 +61,22 @@ function App() {
   //console.log("........... rendering  with items =", items)
   function addItem(e) {
     const inputbox = inputRef.current //that's how we access the current reference variable (sic!)
-    const newitem = inputbox.value
-    if (newitem.trim().length === 0) return
-    setItems([...items, [false, newitem] ]) // !! request a STATE UPDATE here!!
+    const newitem = inputbox.value.trim()
+    if (newitem.length === 0) return
+    //only add the new item if not already there
+    for (let i=0;i<items.length;i++) 
+      if (items[i][1].toLowerCase()===newitem.toLowerCase()) {
+        console.log(` item "${newitem}" already on the list!`)
+        inputbox.value=""
+        return
+      } 
+    setItems([...items, [false, newitem] ]) // !! request a STATE UPDATE here
     inputbox.value = "" //clear the input box to make it ready for next input
+  }
+
+  function handleEnter(e) {
+    if (e.key === 'Enter')
+         addItem(e)
   }
 
   function clearList() { setItems([]) } //are you sure?
@@ -77,9 +89,7 @@ function App() {
       setItems(unchecked)
   }
 
-  function checkChange() {
-       forceUpdate(!flip)
-  }
+  function checkChange() { forceUpdate(!flip) }
 
   return (
     <div className="App">
@@ -88,7 +98,7 @@ function App() {
         <List items={items} onChange={checkChange} />
       </div>
       <div className="input-area">
-        <label>Enter item: &nbsp;<input ref={inputRef} type="text" id="txtIn" /> </label>
+        <label>Enter item: &nbsp;<input ref={inputRef} type="text" id="txtIn" onKeyDown={handleEnter}/> </label>
         &nbsp;&nbsp;<button type="button" onClick={addItem}>Add item</button>
       </div>
       <div>
