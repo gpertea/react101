@@ -5,8 +5,9 @@
   min-width:30em;
 }
 
-.ulist {
+.ulist {  
   display:inline-block;
+  list-style: none;
   text-align: left;
   color: darkred;
   border:1px solid #ded;
