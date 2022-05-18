@@ -17,18 +17,18 @@ storedData.forEach( (it) => {
 
 
 function ListItem({ item, onChange }) {
-  //const [checked, setChecked] = useState(false)
   const ckRef = useRef()
+
+  let id=`${(0+item[0])}.${item[1]}`
   function handleChange(e) {
-    const v=e.target.checked
-    const [, text]=item
-    console.log("checkbox for ", text, " is:", v)
-    //if (onChange && typeof onChange == 'function') onChange(v)
-    item[0]=v //update value
+    const v=e.target.checked   
+    if (onChange && typeof onChange == 'function') onChange(v)
+    item[0]=v //update value directly! (but React is not aware of the state change)
   }
 
   return (<li>
-    <label><input ref={ckRef} type="checkbox" onChange={handleChange} />&nbsp; {item[1]}</label>
+       <input ref={ckRef} id={id} type="checkbox" onChange={handleChange} checked={item[0]} />
+       <label htmlFor={id}> {item[1]} </label>
   </li>)
 }
 
@@ -37,9 +37,9 @@ function List(props) {
   const c = props.color || "darkred"
   return (
     <ul className="ulist" style={{ color: c }}>
-      {/* props.items.map( (item,i) => <li key={i}> {item}</li> ) */
-        props.items.map((item, i) => <ListItem key={JSON.stringify(item)} item={item} onChange={props.onChange}/>)
-      }
+     {
+      props.items.map((item, i) => <ListItem key={JSON.stringify(item)} item={item} onChange={props.onChange}/>)
+     }
     </ul>
   )
 }
@@ -48,10 +48,13 @@ function App() {
   let date = new Date().toLocaleString()
   const [items, setItems] = useState(storedItems)
   //items is an array of [checked, itemText]
-  const inputRef = useRef()
+
+  //force state update when a list item notifies parents about a checkbox action
+  const [flip, forceUpdate] = useState(false) 
+  
+  const inputRef = useRef() //reference to DOM of input box
 
   useEffect(() => {
-    console.log(" ..... storing to local storage: ", items)
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items))
   })
 
@@ -60,25 +63,38 @@ function App() {
     const inputbox = inputRef.current //that's how we access the current reference variable (sic!)
     const newitem = inputbox.value
     if (newitem.trim().length === 0) return
-    //console.log("Button clicked, adding ", newitem)
     setItems([...items, [false, newitem] ]) // !! request a STATE UPDATE here!!
     inputbox.value = "" //clear the input box to make it ready for next input
   }
 
   function clearList() { setItems([]) } //are you sure?
 
+  function clearChecked() {
+      const unchecked=[]
+      items.forEach( (it)=> {
+        if (!it[0]) unchecked.push(it)
+      })
+      setItems(unchecked)
+  }
+
+  function checkChange() {
+       forceUpdate(!flip)
+  }
+
   return (
     <div className="App">
       <div className="content">
         <h3>Date is: {date}</h3>
-        <List items={items} />
+        <List items={items} onChange={checkChange} />
       </div>
       <div className="input-area">
-        <label>Enter item: <input ref={inputRef} type="text" id="txtIn" /> </label>
-        <button type="button" onClick={addItem}>Add item</button>
+        <label>Enter item: &nbsp;<input ref={inputRef} type="text" id="txtIn" /> </label>
+        &nbsp;&nbsp;<button type="button" onClick={addItem}>Add item</button>
       </div>
       <div>
-        <button type="button" onClick={clearList}>Clear list!</button>
+        <button type="button" onClick={clearList}>Clear All!</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" onClick={clearChecked}>Clear checked</button>
       </div>
     </div>
   )
