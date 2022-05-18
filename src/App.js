@@ -33,7 +33,6 @@ function ListItem({ item, onChange }) {
 }
 
 function List(props) {
-
   const c = props.color || "darkred"
   return (
     <ul className="ulist" style={{ color: c }}>
