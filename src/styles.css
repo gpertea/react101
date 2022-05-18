@@ -1,0 +1,19 @@
+.content, .input-area {
+  width: 50%;
+  margin: 0.5em auto;
+  border: 1px solid pink;
+  min-width:30em;
+}
+
+.ulist {
+  display:inline-block;
+  text-align: left;
+  color: darkred;
+  border:1px solid #ded;
+  padding:6px 2em;
+}
+
+.input-area {
+  border:1px solid #ddd;
+  padding:1em 0;
+}
