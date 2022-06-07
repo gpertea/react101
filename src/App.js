@@ -9,13 +9,13 @@ function App() {
   let date = new Date().toLocaleString()
   const [tab, setTab] = useState(0) //numeric ID of the selected tab
 
-  // mount/dismount hook
+  // mount/unmount hook
   useEffect(() => {
     console.log(" >> App mounted in DOM");
     return ()=> {
-       console.log(" << App dismounted.")
+       console.log(" << App unmounting.")
     }
-  }, []) // <-- empty dependency array means mount/dismount hook
+  }, []) // <-- empty dependency array means mount/unmount hook
 
   // useEffect post-render hook
   useEffect(() => {
