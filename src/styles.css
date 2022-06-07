@@ -5,7 +5,50 @@
   min-width:30em;
 }
 
-.ulist {  
+.tabs {
+  margin:0 4em;
+  padding:0;
+}
+
+.tab-content {
+  background-color:#eee;
+  margin:0 1em;
+  padding:0 8px;
+  border:1px solid #eee;
+  border-radius:6px;
+  min-height:6em;
+}
+
+.tab-hdr {
+  margin:0 4px;
+  padding:2px 4px 10px;
+  border-radius:6px 6px 0 0;
+
+}
+
+.tab-hdr > button {
+   border:none;
+   background-color:transparent;
+   padding:6px;
+   cursor: pointer;
+   color:#666;
+}
+.tab-hdr:hover {
+  background-color:#eee;
+
+}
+
+.tab-hdr.sel {
+  background-color:#eee;
+}
+
+.tab-hdr.sel > button {
+  color:#222;
+  font-size:90%;
+}
+
+
+.ulist {
   display:inline-block;
   list-style: none;
   text-align: left;
@@ -13,14 +56,4 @@
   border:1px solid #ded;
   padding:6px 2em;
 
-}
-
-.ulist li input[type="checkbox"]:checked + label {
-  color:gray;
-  text-decoration: line-through;
-}
-
-.input-area {
-  border:1px solid #ddd;
-  padding:1em 0;
 }
