@@ -26,13 +26,6 @@
 
 }
 
-.tab-hdr > button {
-   border:none;
-   background-color:transparent;
-   padding:6px;
-   cursor: pointer;
-   color:#666;
-}
 .tab-hdr:hover {
   background-color:#eee;
 
@@ -42,11 +35,18 @@
   background-color:#eee;
 }
 
+.tab-hdr > button {
+  border:none;
+  background-color:transparent;
+  padding:6px;
+  cursor: pointer;
+  color:#666;
+}
+
 .tab-hdr.sel > button {
   color:#222;
   font-size:90%;
 }
-
 
 .ulist {
   display:inline-block;
