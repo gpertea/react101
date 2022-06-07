@@ -21,7 +21,7 @@ function ListItem({ item, onChange }) {
 
   let id=`${(0+item[0])}.${item[1]}`
   function handleChange(e) {
-    const v=e.target.checked   
+    const v=e.target.checked
     if (onChange && typeof onChange == 'function') onChange(v)
     item[0]=v //update value directly! (but React is not aware of the state change)
   }
@@ -49,26 +49,26 @@ function App() {
   //items is an array of [checked, itemText]
 
   //force state update when a list item notifies parents about a checkbox action
-  const [flip, forceUpdate] = useState(false) 
-  
+  const [flip, forceUpdate] = useState(false)
+
   const inputRef = useRef() //reference to DOM of input box
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items))
   })
 
-  //console.log("........... rendering  with items =", items)
+  console.log("........... rendering  with items =", items)
   function addItem(e) {
     const inputbox = inputRef.current //that's how we access the current reference variable (sic!)
     const newitem = inputbox.value.trim()
     if (newitem.length === 0) return
     //only add the new item if not already there
-    for (let i=0;i<items.length;i++) 
+    for (let i=0;i<items.length;i++)
       if (items[i][1].toLowerCase()===newitem.toLowerCase()) {
         console.log(` item "${newitem}" already on the list!`)
         inputbox.value=""
         return
-      } 
+      }
     setItems([...items, [false, newitem] ]) // !! request a STATE UPDATE here
     inputbox.value = "" //clear the input box to make it ready for next input
   }
