@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 const tabs  = ["RNAseq", "DNAmet", "WGS"] // tab display labels
 const tabIds= ["rnaseq", "dnam",   "wgs"] // corresponding data type IDs in database
 
-const mwSrv="http://srv16.lieber.local:4095/pgdb/dslist"; //  + /tabId[tab]
+const mwSrv="http://srv16.lieber.local:4095/pgdb/dslist"; //  + /tabIds[tab]
 
 function App() {
   let date = new Date().toLocaleString()
