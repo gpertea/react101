@@ -2,11 +2,11 @@
   width: 80%;
   margin: 0.5em auto;
   border: 1px solid pink;
-  min-width:32em;
+  min-width:31em;
 }
 
 .tabs {
-  margin:0 4em;
+  margin:0 2em;
   padding:0;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .tbl tbody tr:nth-child(odd) {
-    background-color: #f2f2f2;
+    background-color: #f6f6f6;
 }
 
 .tbl th {
