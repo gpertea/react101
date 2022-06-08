@@ -31,8 +31,10 @@ function App() {
         })
   }, [tab]) //<-- dependency array
 
-  console.log(`~~~~ App rendering with tab: ${tabs[tab]}`)
+
   const dataReady=(datasets && datasets.length)
+  const dr=dataReady ? "" : "NOT "
+  console.log(`~~~~ App rendering with tab: ${tabs[tab]}, data ${dr}ready`)
   return (
     <div className="App">
       <div className="content">
@@ -41,32 +43,29 @@ function App() {
         <div className="tabs">
           { tabIds.map( (dbId, idx) =>
             <span key={dbId} className={tab===idx ? "tab-hdr sel" : "tab-hdr"} >
-              <button onClick={()=>setTab(idx)}>{tabs[idx]}</button>
+              <button onClick={()=> { setTab(idx); setDatasets([])} }>{tabs[idx]}</button>
             </span>
             )}
          <div className="tab-content">
-           { dataReady ?
-           <div>
-           <table className="tbl">
+          { dataReady ?
+           <div> <table className="tbl">
              <thead>
-               <tr>
-                 { datasets[0].map((h)=><th>{h}</th>) }
-               </tr>
+               <tr>{ datasets[0].map((h)=><th key={h}>{h}</th>) }</tr>
              </thead>
              <tbody>
              { datasets.slice(1).map( (r,i) =>
-               <tr>{ r.map( (c,i) =>
-                  <td>{c}</td>) }
+               <tr key={i}>{ r.map( (c,j) =>
+                  <td key={j}>{c}</td>) }
                </tr>)
              }
              </tbody>
-           </table>
-           </div>
-           : <h3> Loading </h3>
-           }
+            </table>
+          </div>
+          : <h3> Loading </h3>
+          }
          </div>
        </div>
-        <br/>
+       <br/>
       </div>
     </div>
   )
