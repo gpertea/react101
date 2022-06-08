@@ -22,7 +22,7 @@ function App() {
 
   // useEffect post-render hook
   useEffect(() => {
-    //console.log(`  -- useEffect: post-render after tab changed to ${tabs[tab]}`)
+    console.log(`  -- useEffect: post-render after tab changed to ${tabs[tab]}`)
     fetch(`${mwSrv}/${tabIds[tab]}`)
      .then(res => res.json())
      .then(json => { //async code
