@@ -7,8 +7,21 @@ const tabIds= ["rnaseq", "dnam",   "wgs"] // corresponding data type IDs in data
 
 const mwSrv="http://srv16.lieber.local:4095/pgdb/dslist"; //  + /tabIds[tab]
 
+function TClock() { //self updating clock component
+  const [time, setTime] = useState(new Date().toLocaleString())   
+  //mount/unmount hook
+  useEffect( ()=>{
+    const interval = setInterval( ()=> setTime(new Date().toLocaleString()), 1000)
+    return ()=> { clearInterval(interval)}
+  }, [] )
+  return (
+   <div style={{color: "#666", position:"relative", width:"100%", textAlign:"right", top: "4px", height:"0px"}}>
+     {time}&nbsp; 
+   </div>
+  )
+}
+
 function App() {
-  let date = new Date().toLocaleString()
   const [tab, setTab] = useState(0) //numeric ID of the selected tab
   const [datasets, setDatasets]=useState([]) //data fetched asynchronously
 
@@ -38,7 +51,7 @@ function App() {
   return (
     <div className="App">
       <div className="content">
-        <h4>{date}</h4>
+        <TClock />
         <h3>Datasets</h3>
         <div className="tabs">
           { tabIds.map( (dbId, idx) =>
