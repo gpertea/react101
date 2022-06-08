@@ -61,7 +61,7 @@ function App() {
              </tbody>
             </table>
           </div>
-          : <h3> Loading </h3>
+          : <h3> Loading... </h3>
           }
          </div>
        </div>
