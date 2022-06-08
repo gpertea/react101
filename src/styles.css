@@ -1,8 +1,8 @@
 .content, .input-area {
-  width: 50%;
+  width: 80%;
   margin: 0.5em auto;
   border: 1px solid pink;
-  min-width:30em;
+  min-width:32em;
 }
 
 .tabs {
@@ -17,6 +17,7 @@
   border:1px solid #eee;
   border-radius:6px;
   min-height:6em;
+  min-width:26em;
 }
 
 .tab-hdr {
@@ -48,6 +49,29 @@
   font-size:90%;
 }
 
+
+.tbl {
+  text-align:right;
+  margin:0 auto;
+}
+.tbl td, .tbl th { min-width:3em;}
+.tbl td:first-child, .tbl th:first-child {
+  text-align:left;
+}
+
+
+.tbl tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+
+.tbl th {
+  font-weight:normal;
+  color: #888;
+}
+
+
+
 .ulist {
   display:inline-block;
   list-style: none;
@@ -57,3 +81,4 @@
   padding:6px 2em;
 
 }
+
